@@ -109,12 +109,49 @@
     //
     // test if a specific column on this board contains a conflict
     hasColConflictAt: function(colIndex) {
-      return false; // fixme
+      var column = [];
+      var allRows = this.rows();
+      var countCol = 0;
+      for (var i = 0; i < allRows.length; i++) {
+        column.push(allRows[i][colIndex]);
+      }
+      for (var j = 0; j < column.length; j++) {
+        if (column[j] === 1) {
+          countCol++;
+        }
+      }
+      if (countCol > 1) {
+        return true;
+      }
+
+      return false; 
     },
 
     // test if any columns on this board contain conflicts
     hasAnyColConflicts: function() {
-      return false; // fixme
+      var allRows = this.rows();
+
+      var column0 = [];
+      var column1 = [];
+      var column2 = [];
+      var column3 = [];
+
+      for (var i = 0; i < allRows.length; i++) {
+        column0.push(allRows[i][0]);
+        column1.push(allRows[i][1]);
+        column2.push(allRows[i][2]);
+        column3.push(allRows[i][3]);
+      }
+
+      var columnsArray = [];
+      columnsArray.push(column0, column1, column2, column3);
+
+      for (var i = 0; i < allRows.length; i++) {
+        if (this.hasRowConflictAt(columnsArray[i])) {
+          return true;
+        }
+      }
+      return false;
     },
 
 
