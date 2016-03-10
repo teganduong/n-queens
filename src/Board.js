@@ -161,12 +161,41 @@
     //
     // test if a specific major diagonal on this board contains a conflict
     hasMajorDiagonalConflictAt: function(majorDiagonalColumnIndexAtFirstRow) {
-      return false; // fixme
+      var diagIndex = majorDiagonalColumnIndexAtFirstRow;
+
+      // Given starting column index
+      // initialize rowIndex to 0
+
+      // create results array
+
+      // iterate thru rows
+  
+        // if col[diagIndex] !== undefined
+        // Push value at current position
+        // Increment rowIndex and colIndex by 1 to get next value
+
+
+      // var diagonal = majorDiagonalColumnIndexAtFirstRow;
+      // var countDiag = 0;
+      // for (var i = 0; i < diagonal.length; i++) {
+      //   if (diagonal[i] === 1) {
+      //     countDiag++;
+      //   }
+      // }
+      // if (countDiag > 1) {
+      //   return true;
+      // }
+      // return false;
+
     },
 
     // test if any major diagonals on this board contain conflicts
     hasAnyMajorDiagonalConflicts: function() {
-      return false; // fixme
+
+      var diagonal = [];
+      var slices = this.get('n') * 2 - 1;
+
+      return false; 
     },
 
 
