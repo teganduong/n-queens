@@ -162,40 +162,44 @@
     // test if a specific major diagonal on this board contains a conflict
     hasMajorDiagonalConflictAt: function(majorDiagonalColumnIndexAtFirstRow) {
       var diagIndex = majorDiagonalColumnIndexAtFirstRow;
+      var allRows = this.rows();
+      var startRow, startCol, r, c;
+      var count = 0;
 
-      // Given starting column index
-      // initialize rowIndex to 0
+      if (diagIndex < 0) {
+        startRow = -diagIndex;
+        startCol = 0;
+      } else {
+        startRow = 0;
+        startCol = diagIndex;
+      }
 
-      // create results array
+      r = startRow;
+      c = startCol;
 
-      // iterate thru rows
-  
-        // if col[diagIndex] !== undefined
-        // Push value at current position
-        // Increment rowIndex and colIndex by 1 to get next value
-
-
-      // var diagonal = majorDiagonalColumnIndexAtFirstRow;
-      // var countDiag = 0;
-      // for (var i = 0; i < diagonal.length; i++) {
-      //   if (diagonal[i] === 1) {
-      //     countDiag++;
-      //   }
-      // }
-      // if (countDiag > 1) {
-      //   return true;
-      // }
-      // return false;
-
+      while (r < allRows.length && c < allRows.length) {
+        count += allRows[r][c];
+        r++;
+        c++;
+      }
+      if (count > 1) {
+        return true;
+      }
+      return false;
+      
     },
 
     // test if any major diagonals on this board contain conflicts
     hasAnyMajorDiagonalConflicts: function() {
+      var allRows = this.rows();
+      var n = allRows.length;
 
-      var diagonal = [];
-      var slices = this.get('n') * 2 - 1;
-
-      return false; 
+      for (var index = - (n - 1); index < n; index++) {
+        if (this.hasMajorDiagonalConflictAt(index)) {
+          return true;
+        }
+      }
+      return false;
     },
 
 
