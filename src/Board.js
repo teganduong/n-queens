@@ -208,26 +208,17 @@
     //
     // test if a specific minor diagonal on this board contains a conflict
     hasMinorDiagonalConflictAt: function(minorDiagonalColumnIndexAtFirstRow) {
-      var diagIndex = minorDiagonalColumnIndexAtFirstRow;
       var allRows = this.rows();
-      var startRow, startCol, r, c;
+      var startRow = 0;
+      var startCol = minorDiagonalColumnIndexAtFirstRow;
       var count = 0;
 
-      if (diagIndex < 0) {
-        startRow = -diagIndex;
-        startCol = 0;
-      } else {
-        startRow = 0;
-        startCol = diagIndex;
-      }
-
-      r = startRow;
-      c = startCol;
-
-      while (r < allRows.length && c < allRows.length) {
-        count += allRows[r][c];
-        r++;
-        c--;
+      while (startRow < allRows.length && startCol >= 0) {
+        if (startCol < allRows.length) {
+          count += allRows[startRow][startCol];  
+        }
+        startRow++;
+        startCol--;
       }
       if (count > 1) {
         return true;
@@ -240,7 +231,7 @@
       var allRows = this.rows();
       var n = allRows.length;
 
-      for (var index = - (n - 1); index < n; index++) {
+      for (var index = (n * 2) - 1; index >= 0; index--) {
         if (this.hasMinorDiagonalConflictAt(index)) {
           return true;
         }
