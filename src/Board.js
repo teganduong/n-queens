@@ -186,7 +186,6 @@
         return true;
       }
       return false;
-      
     },
 
     // test if any major diagonals on this board contain conflicts
