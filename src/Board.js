@@ -162,40 +162,45 @@
     // test if a specific major diagonal on this board contains a conflict
     hasMajorDiagonalConflictAt: function(majorDiagonalColumnIndexAtFirstRow) {
       var diagIndex = majorDiagonalColumnIndexAtFirstRow;
-
+      var allRows = this.rows();
       // Given starting column index
       // initialize rowIndex to 0
+      var rowIndex = 0;
 
-      // create results array
+      // create results array that outputs diagonal slices as subarrays
+      var results = [];
 
       // iterate thru rows
+      for (rowIndex; rowIndex < allRows.length; rowIndex++) {
   
-        // if col[diagIndex] !== undefined
+        // if allRows[rowIndex][diagIndex] !== undefined
+        if (allRows[rowIndex][diagIndex] !== undefined) {
+          var value = allRows[rowIndex][diagIndex];
         // Push value at current position
-        // Increment rowIndex and colIndex by 1 to get next value
-
-
-      // var diagonal = majorDiagonalColumnIndexAtFirstRow;
-      // var countDiag = 0;
-      // for (var i = 0; i < diagonal.length; i++) {
-      //   if (diagonal[i] === 1) {
-      //     countDiag++;
-      //   }
-      // }
-      // if (countDiag > 1) {
-      //   return true;
-      // }
-      // return false;
-
+          results.push(value);
+        }
+        // Increment diagIndex by 1 to get next value
+        diagIndex++;
+      }
+      return hasRowConflictAt(results);
     },
 
     // test if any major diagonals on this board contain conflicts
     hasAnyMajorDiagonalConflicts: function() {
-
-      var diagonal = [];
-      var slices = this.get('n') * 2 - 1;
-
-      return false; 
+      var allRows = this.rows();
+        
+      for (var c = 0; c < allRows.length; c++) {
+        if (hasMajorDiagonalConflictAt(allRows[0][c]) === true) {
+          return true;
+        }
+      }
+    
+      for (var r = 1; r < allRow.length; r++) {
+        if (hasMajorDiagonalConflictAt(allRows[r][0] === true)) {
+          return true;
+        }
+      }
+      return false;
     },
 
 
