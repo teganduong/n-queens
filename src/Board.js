@@ -79,27 +79,47 @@
     //
     // test if a specific row on this board contains a conflict
     hasRowConflictAt: function(rowIndex) {
+      var row = this.get(rowIndex);
       var count = 0;
-      for (var i = 0; i < rowIndex.length; i++) {
-        if (rowIndex[i] === 1) {
-          count++;
-        }
+
+      for ( var i = 0; i < row.length; i++ ) {
+        count += row[i];
       }
-      if (count > 1) {
-        return true;
-      }
-      return false;
+
+      return count > 1;
+
+      // var count = 0;
+      // for (var i = 0; i < rowIndex.length; i++) {
+      //   if (rowIndex[i] === 1) {
+      //     count++;
+      //   }
+      // }
+      // if (count > 1) {
+      //   return true;
+      // }
+      // return false;
     },
 
     // test if any rows on this board contain conflicts
     hasAnyRowConflicts: function() {
-      var allRows = this.rows();
-      for (var i = 0; i < allRows.length; i++) {
-        if (this.hasRowConflictAt(allRows[i])) {
+      
+      var size = this.get('n');
+
+      for ( var i = 0; i < size; i++ ) {
+        if ( this.hasRowConflictAt(i) ) {
           return true;
         }
       }
-      return false; 
+
+      return false;
+
+      // var allRows = this.rows();
+      // for (var i = 0; i < allRows.length; i++) {
+      //   if (this.hasRowConflictAt(allRows[i])) {
+      //     return true;
+      //   }
+      // }
+      // return false; 
     },
 
 
@@ -109,49 +129,72 @@
     //
     // test if a specific column on this board contains a conflict
     hasColConflictAt: function(colIndex) {
-      var column = [];
-      var allRows = this.rows();
-      var countCol = 0;
-      for (var i = 0; i < allRows.length; i++) {
-        column.push(allRows[i][colIndex]);
-      }
-      for (var j = 0; j < column.length; j++) {
-        if (column[j] === 1) {
-          countCol++;
-        }
-      }
-      if (countCol > 1) {
-        return true;
+
+      var size = this.get('n');
+      var count = 0;
+
+      for ( var i = 0; i < size; i++ ) {
+        var row = this.get(i);
+        count += row[colIndex];
       }
 
-      return false; 
+      return count > 1;
+
+
+      // var column = [];
+      // var allRows = this.rows();
+      // var countCol = 0;
+      // for (var i = 0; i < allRows.length; i++) {
+      //   column.push(allRows[i][colIndex]);
+      // }
+      // for (var j = 0; j < column.length; j++) {
+      //   if (column[j] === 1) {
+      //     countCol++;
+      //   }
+      // }
+      // if (countCol > 1) {
+      //   return true;
+      // }
+
+      // return false; 
     },
 
     // test if any columns on this board contain conflicts
     hasAnyColConflicts: function() {
-      var allRows = this.rows();
 
-      var column0 = [];
-      var column1 = [];
-      var column2 = [];
-      var column3 = [];
+      var size = this.get('n');
 
-      for (var i = 0; i < allRows.length; i++) {
-        column0.push(allRows[i][0]);
-        column1.push(allRows[i][1]);
-        column2.push(allRows[i][2]);
-        column3.push(allRows[i][3]);
-      }
-
-      var columnsArray = [];
-      columnsArray.push(column0, column1, column2, column3);
-
-      for (var i = 0; i < allRows.length; i++) {
-        if (this.hasRowConflictAt(columnsArray[i])) {
+      for ( var i = 0; i < size; i++ ) {
+        if ( this.hasColConflictAt(i) ) {
           return true;
         }
       }
+
       return false;
+
+      // var allRows = this.rows();
+
+      // var column0 = [];
+      // var column1 = [];
+      // var column2 = [];
+      // var column3 = [];
+
+      // for (var i = 0; i < allRows.length; i++) {
+      //   column0.push(allRows[i][0]);
+      //   column1.push(allRows[i][1]);
+      //   column2.push(allRows[i][2]);
+      //   column3.push(allRows[i][3]);
+      // }
+
+      // var columnsArray = [];
+      // columnsArray.push(column0, column1, column2, column3);
+
+      // for (var i = 0; i < allRows.length; i++) {
+      //   if (this.hasRowConflictAt(columnsArray[i])) {
+      //     return true;
+      //   }
+      // }
+      // return false;
     },
 
 
